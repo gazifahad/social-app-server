@@ -27,7 +27,7 @@ app.use('/posts',postRoutes)
 // pw: KrmQ41GOjZh3MT0U
 
 
-const uri = process.env.CONNECTION_URL;
+const uri = `mongodb+srv://${process.env.DATABASE_user}:${process.env.DATABASE_pw}@cluster0.dbg5s.mongodb.net/?retryWrites=true&w=majority`;
 const PORT=process.env.PORT || 5000;
 mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=>app.listen(PORT,()=>console.log(`server running on: ${PORT}`)))
