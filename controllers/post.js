@@ -2,10 +2,24 @@ import express, { query } from 'express';
 import mongoose from 'mongoose';
 import PostMessage from "../models/postMessage.js";
 
+
 const router = express.Router();
+export const getPost= async (req,res) =>{
+    const {id}=req.params;
+    console.log(req.params);
+    
+    try {
+        // console.log(id);
+        const post=await PostMessage.findById(id);
+        res.status(200).json(post);
+
+    } catch (error) {
+        res.status(404).json({mesage: error.mesage})
+    }
+}
 export const getPosts = async (req, res) => {
     const {page}=req.query;
-    console.log(page);
+    // console.log(page);
     try {
         const LIMIT=6; 
         // limit can be used dynamically
@@ -24,7 +38,7 @@ export const getPosts = async (req, res) => {
 }
 export const getPostsBySearch=async (req, res)=>{
     const {searchQuery , tags}=req.query; 
-    console.log(searchQuery);
+    // console.log(searchQuery);
     
     
     try {
